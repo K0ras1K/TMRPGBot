@@ -12,6 +12,8 @@ interface NoteEntity : Entity<NoteEntity> {
     val USER_XP: Int
     val USER_ADMIN: Boolean
     val USER_BAN: Boolean
+    val USER_NICK: String
+    val USER_MESSAGES: Int
 }
 
 
@@ -21,4 +23,6 @@ object NotesEntity : Table<NoteEntity>("tmbot") {
     val USER_XP = int("user_xp").bindTo { it.USER_XP }
     val USER_ADMIN = boolean("user_admin").bindTo { it.USER_ADMIN }
     val USER_BAN = boolean("user_ban").bindTo { it.USER_BAN }
+    val USER_NICK = text("user_nick").bindTo { it.USER_NICK }
+    val USER_MESSAGES = int("user_messages").bindTo { it.USER_MESSAGES }
 }

@@ -6,8 +6,8 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "me.user"
-version = "1.0-SNAPSHOT"
+group = "k0ras1k"
+version = "0.1"
 
 repositories {
     mavenCentral()

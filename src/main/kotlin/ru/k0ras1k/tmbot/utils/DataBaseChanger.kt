@@ -8,9 +8,10 @@ import ru.k0ras1k.tmbot.entities.NotesEntity
 class DataBaseChanger: DataBaseReader() {
 
     //Add user to database
-    fun addUser(user_id: String) {
+    fun addUser(user_id: String, user_nick: String) {
         database.insert(NotesEntity) {
             set(it.USER_ID, user_id)
+            set(it.USER_NICK, user_nick)
         }
     }
 
@@ -27,6 +28,15 @@ class DataBaseChanger: DataBaseReader() {
     fun addXP(user_id: String, xp: Int) {
         database.update(NotesEntity) {
             set(it.USER_XP, it.USER_XP + xp)
+            where { it.USER_ID eq user_id }
+        }
+    }
+
+
+    //Add user message counter
+    fun addMessage(user_id: String, message_count: Int) {
+        database.update(NotesEntity) {
+            set(it.USER_MESSAGES, it.USER_MESSAGES + message_count)
             where { it.USER_ID eq user_id }
         }
     }
@@ -89,10 +99,11 @@ class DataBaseChanger: DataBaseReader() {
     }
 
 
-
-
-
-
-
-
+    //Update user nick
+    fun updateUserNick(user_id: String, user_nick: String) {
+        database.update(NotesEntity) {
+            set(it.USER_NICK, user_nick)
+            where { it.USER_ID eq user_id }
+        }
+    }
 }

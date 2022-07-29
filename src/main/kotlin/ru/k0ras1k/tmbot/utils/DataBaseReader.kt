@@ -29,7 +29,9 @@ open class DataBaseReader {
     fun userInBase(user_id: String): Boolean {
         val finder = database.sequenceOf(NotesEntity).firstOrNull { it.USER_ID eq user_id }
         if (finder != null) {
-            return true
+            if (finder.USER_ID == user_id) {
+                return true
+            }
         }
         return false
     }
@@ -50,7 +52,10 @@ open class DataBaseReader {
     //Return user Rank
     fun getRank(user_id: String): Int {
         val finder = database.sequenceOf(NotesEntity).find { (it.USER_ID eq user_id) }
-        return finder!!.USER_RANG
+        if (finder != null) {
+            return finder!!.USER_RANG
+        }
+        return 0
     }
 
 
