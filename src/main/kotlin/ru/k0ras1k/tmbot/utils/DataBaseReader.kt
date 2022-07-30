@@ -67,4 +67,14 @@ open class DataBaseReader {
         }
         return false
     }
+
+    fun isUserMute(user_id: String): Boolean {
+        val finder = database.sequenceOf(NotesEntity).find { (it.USER_ID eq user_id) }
+        if (finder != null) {
+            if (finder.USER_MUTE) {
+                return true
+            }
+        }
+        return false
+    }
 }

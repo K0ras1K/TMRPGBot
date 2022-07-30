@@ -3,6 +3,7 @@ package ru.k0ras1k.tmbot.utils
 import org.ktorm.dsl.*
 import org.ktorm.entity.find
 import org.ktorm.entity.sequenceOf
+import ru.k0ras1k.tmbot.dataBaseChanger
 import ru.k0ras1k.tmbot.entities.NotesEntity
 
 class DataBaseChanger: DataBaseReader() {
@@ -11,7 +12,7 @@ class DataBaseChanger: DataBaseReader() {
     fun addUser(user_id: String, user_nick: String) {
         database.insert(NotesEntity) {
             set(it.USER_ID, user_id)
-            set(it.USER_NICK, user_nick)
+            set(it.USER_NICK, user_nick.toString())
         }
     }
 
@@ -103,6 +104,15 @@ class DataBaseChanger: DataBaseReader() {
     fun updateUserNick(user_id: String, user_nick: String) {
         database.update(NotesEntity) {
             set(it.USER_NICK, user_nick)
+            where { it.USER_ID eq user_id }
+        }
+    }
+
+
+    //Update user mute
+    fun updateUserMute(user_id: String, muted: Boolean) {
+        database.update(NotesEntity) {
+            set(it.USER_MUTE, muted)
             where { it.USER_ID eq user_id }
         }
     }

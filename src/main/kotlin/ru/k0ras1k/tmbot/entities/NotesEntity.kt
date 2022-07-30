@@ -1,5 +1,6 @@
 package ru.k0ras1k.tmbot.entities
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import org.ktorm.entity.Entity
 import org.ktorm.schema.Table
 import org.ktorm.schema.boolean
@@ -14,6 +15,7 @@ interface NoteEntity : Entity<NoteEntity> {
     val USER_BAN: Boolean
     val USER_NICK: String
     val USER_MESSAGES: Int
+    val USER_MUTE: Boolean
 }
 
 
@@ -25,4 +27,5 @@ object NotesEntity : Table<NoteEntity>("tmbot") {
     val USER_BAN = boolean("user_ban").bindTo { it.USER_BAN }
     val USER_NICK = text("user_nick").bindTo { it.USER_NICK }
     val USER_MESSAGES = int("user_messages").bindTo { it.USER_MESSAGES }
+    val USER_MUTE = boolean("user_mute").bindTo { it.USER_MUTE }
 }
